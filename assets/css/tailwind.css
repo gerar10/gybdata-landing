@@ -1469,9 +1469,9 @@ body {
 }
 
 .to-blue-500{
-  --tw-gradient-to: #3b82f6 var(--tw-gradient-to-position);
+  --tw-gradient-to: #A20AFF var(--tw-gradient-to-position);
 }
-
+/* #3b82f6 */
 .to-stroke\/0{
   --tw-gradient-to: rgb(223 228 234 / 0) var(--tw-gradient-to-position);
 }
