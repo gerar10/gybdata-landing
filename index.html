@@ -17,7 +17,10 @@
       src="https://kit.fontawesome.com/385479e3e1.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+    />
     <!-- ==== WOW JS ==== -->
     <script src="assets/js/wow.min.js"></script>
     <script>
@@ -4000,7 +4003,12 @@
               >
                 Envíanos un mensaje
               </h3>
-              <form form id="myForm" action="https://formspree.io/f/xpzvlano" method="POST">
+              <form
+                form
+                id="myForm"
+                action="https://formspree.io/f/xpzvlano"
+                method="POST"
+              >
                 <div class="mb-[22px]">
                   <label
                     for="nombre"
@@ -4717,38 +4725,56 @@
         },
       });
     </script>
- <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-<script>
-  var notyf = new Notyf({
-    duration: 6000,
-    position: {
-      x: 'center',
-      y: 'top',
-    },
-    dismissible: true
-  });
-  document.getElementById("myForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
-  
-      // Envía el formulario mediante una petición AJAX
-      var formData = new FormData(this);
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", this.action);
-      xhr.setRequestHeader("Accept", "application/json");
-      xhr.onreadystatechange = function() {
-          if (xhr.readyState !== XMLHttpRequest.DONE) return;
-          if (xhr.status === 200) {
-              // Aquí puedes mostrar el popup después de que el formulario se haya enviado correctamente
-              notyf.success('Formulario enviado con Éxito! A la brevedad nos pondremos en contacto!');
-              document.getElementById("myForm").reset();
-          } else {
-              // Aquí puedes manejar errores en el envío del formulario, si lo deseas
-              notyf.error('Hubo un error al enviar el formulario, por favor intente nuevamente completando todos los campos');
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script>
+      var notyf = new Notyf({
+        duration: 6000,
+        position: {
+          x: "center",
+          y: "top",
+        },
+        dismissible: true,
+      });
+      document
+        .getElementById("myForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          var nombre = document
+            .querySelector('input[name="nombre"]')
+            .value.trim();
+          var email = document
+            .querySelector('input[name="email"]')
+            .value.trim();
+          var phone = document
+            .querySelector('input[name="phone"]')
+            .value.trim();
+          var message = document
+            .querySelector('textarea[name="message"]')
+            .value.trim();
+
+          if (nombre === "" || email === "" || phone === "" || message === "") {
+            notyf.error("Por favor, complete todos los campos del formulario.");
+            return;
           }
-      };
-      xhr.send(formData);
-      
-  });
-  </script>
+          var formData = new FormData(this);
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", this.action);
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState !== XMLHttpRequest.DONE) return;
+            if (xhr.status === 200) {
+              notyf.success(
+                "Formulario enviado con Éxito! A la brevedad nos pondremos en contacto!",
+              );
+              document.getElementById("myForm").reset();
+            } else {
+              notyf.error(
+                "Hubo un error al enviar el formulario, por favor intente nuevamente completando todos los campos",
+              );
+            }
+          };
+          xhr.send(formData);
+        });
+    </script>
   </body>
 </html>
