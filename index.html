@@ -17,7 +17,7 @@
       src="https://kit.fontawesome.com/385479e3e1.js"
       crossorigin="anonymous"
     ></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <!-- ==== WOW JS ==== -->
     <script src="assets/js/wow.min.js"></script>
     <script>
@@ -2633,9 +2633,9 @@
                   >
                     Whatsapp
                   </a>
-                  , nosotros nos pondremos en contacto contigo para coordinar una
-                  reunión y poder entender tus necesidades y poder brindarte un
-                  presupuesto acorde a tus requerimientos.
+                  , nosotros nos pondremos en contacto contigo para coordinar
+                  una reunión y poder entender tus necesidades y poder brindarte
+                  un presupuesto acorde a tus requerimientos.
                 </p>
               </div>
             </div>
@@ -2709,8 +2709,9 @@
                   para poder brindarte un servicio de mantenimiento acorde a tus
                   necesidades. En función de la situación actual de tu empresa,
                   te brindamos un servicio de mantenimiento para realizar las
-                  modificaciones y requerimientos necesarios para que el análisis de datos sea
-                  efectivo, garantizando la continuidad y el buen funcionamiento del proceso.
+                  modificaciones y requerimientos necesarios para que el
+                  análisis de datos sea efectivo, garantizando la continuidad y
+                  el buen funcionamiento del proceso.
                 </p>
               </div>
             </div>
@@ -3999,7 +4000,7 @@
               >
                 Envíanos un mensaje
               </h3>
-              <form>
+              <form form id="myForm" action="https://formspree.io/f/xpzvlano" method="POST">
                 <div class="mb-[22px]">
                   <label
                     for="nombre"
@@ -4716,5 +4717,38 @@
         },
       });
     </script>
+ <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script>
+  var notyf = new Notyf({
+    duration: 6000,
+    position: {
+      x: 'center',
+      y: 'top',
+    },
+    dismissible: true
+  });
+  document.getElementById("myForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+  
+      // Envía el formulario mediante una petición AJAX
+      var formData = new FormData(this);
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", this.action);
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.onreadystatechange = function() {
+          if (xhr.readyState !== XMLHttpRequest.DONE) return;
+          if (xhr.status === 200) {
+              // Aquí puedes mostrar el popup después de que el formulario se haya enviado correctamente
+              notyf.success('Formulario enviado con Éxito! A la brevedad nos pondremos en contacto!');
+              document.getElementById("myForm").reset();
+          } else {
+              // Aquí puedes manejar errores en el envío del formulario, si lo deseas
+              notyf.error('Hubo un error al enviar el formulario, por favor intente nuevamente completando todos los campos');
+          }
+      };
+      xhr.send(formData);
+      
+  });
+  </script>
   </body>
 </html>
